@@ -232,7 +232,7 @@ body.fullscreen {
 
 #pre-message > h1
 {
-	margin-bottom: 100px;
+	/* margin-bottom: 100px; */
 	font-size: 30px;
 }
 #pre-message > p

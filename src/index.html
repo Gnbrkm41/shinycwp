@@ -9,60 +9,45 @@
 
 	<body>
 		<div id="menu-bar">
-			<div class="title">Idolm@ster Shiny Colors - ShinyCWP <span id="title-version"></span></div>
+			<div class="title">Idolm@ster Shiny Colors - ShinyCWP TransKR <span id="title-version"></span></div>
 			<div class="buttons left">
 				<span class="dropdown-config">
 					<a class="icon-config" style="cursor:pointer; text-decoration: none; color: inherit;" onclick="toggle_config()"></a>
 					<div id="config" class="dialog" style="display: none;">
-						<p><b>NOTE: Changes on the proxy section won't be applied until you close the config dialog.</b> Game will reload if changed.</p>
-						<h3>Proxy configuration</h3>
+						<p><b>참고: 프록시 영역은 설정 다이얼로그를 끄기 전까지는 적용되지 않습니다.</b> 설정이 변경되면 게임이 재시작될 것입니다.</p>
+						<h3>프록시 설정</h3>
 						<div>
-							<p>The client by default uses a custom proxy to set a japanese connection and run the game. If you've already set a system-wide proxy or VPN, you may disable this option to improve speed.
-								<br><br><i>Disabling this also deactivates the custom proxy.</i>
+							<p>해외에서 샤니마스 접속이 막힐 경우 사용합니다. 시스템 프록시 설정이 되어있지 않거나 VPN을 사용하지 않을 때 사용하실 수 있습니다.
+								<br><br><i>이 설정을 비활성화 하면 아래의 수동 설정 프록시도 비활성화 됩니다.</i>
 							</p>
 							<label>
 								<input type="checkbox" config-area="proxy" config-property="active">
-								Enable proxy
+								프록시 활성화하기
 							</label>
-							<p>You can also set your own proxy below<br>(leave blank to use built-in one).</p>
+							<p>프록시 주소를 직접 설정할 수 있습니다.<br>(공백으로 두면 내장된 프록시 중 하나를 사용합니다).</p>
 							<label>
-								<input type="text" config-area="proxy" config-property="custom" maxlength="21" placeholder="ip:port format (will be validated)">
+								<input type="text" config-area="proxy" config-property="custom" maxlength="21" placeholder="ip:port 형식 (유효성 검사를 합니다.)">
 							</label>
 						</div>
-						<h3>Hiori</h3>
+						<h3>한국어 번역 기능</h3>
 						<div>
-							<p>Here you can change the extension behavior. You may need to manually reload the game for the changes to take effect.</p>
+							<p>한국어 번역 기능의 동작을 변경할 수 있습니다. 변경 사항을 적용하려면 게임을 수동으로 다시 불러와야 할 수 있습니다.</p>
 							<label>
-								<input type="checkbox" config-area="hiori" config-property="dialogs">
-								Translate dialog/names (where available)
+								<input type="checkbox" config-area="transKR" config-property="active">
+								한국어 번역 활성화하기
 							</label>
-							<p>Disabling menu translation <b>helps when a game update breaks the translated textures and/or screen freezes</b> when loading a new screen.
-								<br>A reload (F5) might be needed for changes to take effect.</p>
-							<label>
-								<input type="checkbox" config-area="hiori" config-property="menus">
-								Translate menus
-							</label>
-							<!-- <p>Select the language for translations (currently menus only).</p>
-							<label>
-								<select id="lang-sel" onchange="handleLang(this)">
-									<option disabled selected>Not changed</option>
-									<option value="en_us">English</option>
-									<option value="ko_kr">Korean</option>
-								</select>
-								Language (experimental)
-							</label> -->
 						</div>
-						<h3>Sound configuration</h3>
+						<h3>소리 설정</h3>
 						<div>
-							<p>Game sounds usually mute when you leave the window. Here you can change that. (Usefull for Always-on-top mode).</p>
+							<p>창이 포커스를 잃을 때 게임 소리가 비활성화 됩니다. 여기에서 이를 변경할 수 있습니다. (항상 위 모드에 유용합니다.) (현재 작동하지 않는 것으로 보임)</p>
 							<label>
 								<input type="checkbox" config-area="sound" config-property="afk_mute">
-								Mute sound on AFK
+								창을 떠날 때 게임 소리 음소거
 							</label>
 						</div>
-						<h3>Browser data</h3>
+						<h3>브라우저 데이터</h3>
 						<div>
-							<p>Please keep the Shift key pressed when clicking the button to apply the action.<br>Game may be reloaded after process is done.</p>
+							<p>아래의 버튼을 누를 때 Shift키를 누른 상태로 누르십시오.<br>처리를 완료하면 게임이 다시 불러와질 수 있습니다.</p>
 							<button class="button danger" config-custom="delete-cookies">Delete cookies</button><!-- whitespace fix
 							--><button class="button" config-custom="delete-cache">Delete cache</button>
 						</div>
@@ -72,8 +57,8 @@
 				<span class="dropdown-updates">
 					<a id="updates" class="icon-notif-off" onclick="toggle_updates()"></a>
 					<div id="notifications" class="dialog" style="display: none;">
-						<h3>Update(s)</h3>
-						<span class="placeholder" style="text-align: center;">Nothing to show.</span>
+						<h3>업데이트</h3>
+						<span class="placeholder" style="text-align: center;">최신 소식 없음</span>
 						<div class="template">
 							<h4></h4><span></span>
 							<a style="display: none"></a>
@@ -96,23 +81,32 @@
 		<div id="pre-message">
 			<h1>ShinyCWP</h1>
 
-			<p>Thanks for using the beta.</p> 
+			<p>베타 버전을 사용해주셔서 감사합니다.</p> 
 
-			<p>You're advised NOT to use your main account as we aren't yet sure what does Enza/Bamco think about the translation mod or the client. In any case, use <b>at your own risk</b>.</p>
-			<p>Also, please note this software uses a third party japanese proxy, so be aware that,
-				<br>while we DO NOT collect any data, we can't prevent proxy doing so (worst of cases).
+			<p>Enza/Bamco가 번역 모드 또는 클라이언트에 대해 어떻게 생각하는지 아직 확실하지 않으므로 기본 계정을 사용하지 않는 것이 좋습니다. 어떠한 경우든 <b>사용자의 책임하에</b> 사용하십시오.</p>
+			<p>또한, 이 소프트웨어는 서드파티 일본 프록시를 사용하는 것을 인지하십시오.
+				<br>어떠한 사용자의 데이터도 수집하지 않지만, 프록시가 수집하는 것을 막을 수는 없습니다 (최악의 경우).
 			</p>
 		
-			<p>Have fun.<br>— ShinyCWP dev team.</p>
+			<p>줄겨주세요.<br>— ShinyCWP 개발팀.</p>
 
-			<small>Read full disclaimer at:
+			
+			<h1>ShinyCWP TransKR</h1>
+
+			<p>ShinyCWP TransKR은 데스크탑 클라이언트로 샤니마스를 실행할 수 있는 ShinyCWP을 기반으로 <br>한국어를 적용할 수 있게 만들어졌습니다.
+			</p>
+
+			<small>면책 조항 전문을 읽어보세요:
+				<br>ShinyCWP: 
 				<a onclick="nw.Shell.openExternal(this.href); return false;" 
 					href="https://github.com/shinycolors/shinycwp">https://github.com/shinycolors/shinycwp</a>
-
-				<br>This client uses
+				<br>ShinyCWP TransKR: 
+				<a onclick="nw.Shell.openExternal(this.href); return false;" 
+					href="https://github.com/shinycolors/shinycwp">https://github.com/shinycolors/shinycwp</a>
+				<br>한국어 스크립트는 디시인사이드 샤니마스 갤러리의 뉴비(newbiepr)님의
 					<a onclick="nw.Shell.openExternal(this.href); return false;" 
-					href="https://github.com/shinycolors/hiori">Hiori</a>,
-					a fanmade and really cool Chrome extension that will help you with in-game translations.
+					href="https://github.com/newbiepr/shinycolors-trans-kr">shinycolors-trans-kr</a>을 사용하였습니다.
+				<br>참고: 샤니마스가 전세계에서 프록시나 VPN없이 접속이 가능하여서 프록시 관련 설정은 꺼두었습니다.
 			</small>
 		</div>
 

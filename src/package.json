@@ -1,6 +1,6 @@
 {
-	"name": "ShinyCWP",
-	"version": "1.3.0704.1",
+	"name": "ShinyCWP_TransKR",
+	"version": "1.3.0704.2",
 	"main": "index.html",
 	"window": {
 		"width": 1067,
@@ -8,8 +8,7 @@
 		"min_width": 600,
 		"min_height": 360,
 		"frame": false,
-		"title": "ShinyCWP [BETA]",
+		"title": "ShinyCWP TransKR [BETA]",
 		"icon": "shanicon.png"
-	},
-	"bg-script": "hiori/background.js"
+	}
 }

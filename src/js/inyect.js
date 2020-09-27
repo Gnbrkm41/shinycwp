@@ -27,9 +27,9 @@ var remote = null, rnd_proxind = -1, retries = 0, proxy_changed = false, isAOT =
 var valid_ipv4 = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:\:[\d]{1,6})?$/g;
 
 // Initial check to enable or disable background page menu translation hooks.
-if ( nw.App.argv.indexOf("--hiori-disable") != -1 || config.hiori.menus === false )
+if ( nw.App.argv.indexOf("--transKR-disable") != -1 || config.transKR.menus === false )
 {
-	chrome.runtime.sendMessage({scwp: hiori_config}, function(response) {
+	chrome.runtime.sendMessage({scwp: transKR_config}, function(response) {
 		if ( response == "done" )
 		{
 			console.log("Menu translation disabled by config");
@@ -45,7 +45,7 @@ if ( nw.App.argv.indexOf("--hiori-disable") != -1 || config.hiori.menus === fals
 // Get the remote info and save it in the remote var
 function getUpdateInfo()
 {
-	var url = __REMOTE_APP_URL__;
+	var url = "https://github.com/dmc31a42/shinycwp/releases/latest/download/update.json";
 	var opt = {
 		cache: "no-cache, no-store, must-revalidate",
 		credentials: "same-origin",
@@ -239,12 +239,12 @@ function handleProxyChange()
 	proxy_changed = false;
 }
 
-function handleHioriChange(reload = false)
+function handleTransKRChange(reload = false)
 {
 	// Always retrieve last version.
-	var hiori_config = SCWP.config.get("hiori");
+	var transKR_config = SCWP.config.get("transKR");
 
-	chrome.runtime.sendMessage({scwp: hiori_config}, function(response) {
+	chrome.runtime.sendMessage({scwp: transKR_config}, function(response) {
 		console.log(response);
 	});
 }
@@ -256,13 +256,13 @@ function handleHioriChange(reload = false)
 
 function handleLang(elem)
 {
-	var hiori_config = localStorage.getItem("config");
-		hiori_config = JSON.parse(hiori_config);
+	var transKR_config = localStorage.getItem("config");
+	transKR_config = JSON.parse(transKR_config);
 
-	if ( hiori_config.global && hiori_config.global.lang )
+	if ( transKR_config.global && transKR_config.global.lang )
 	{
-		hiori_config.global.lang = elem.value;
-		localStorage.setItem("config", JSON.stringify(hiori_config));
+		transKR_config.global.lang = elem.value;
+		localStorage.setItem("config", JSON.stringify(transKR_config));
 	}
 }
 
@@ -442,7 +442,7 @@ function toggle_config()
 	elem_config.classList.toggle("hide");
 
 	if ( proxy_changed ) { handleProxyChange(); }
-	if ( display_prop == "block" ) { handleHioriChange(); }
+	if ( display_prop == "block" ) { handleTransKRChange(); }
 }
 
 function toggle_updates()
@@ -524,15 +524,15 @@ document.querySelector('#iframe').onload = function()
 	// Verify if frame domain is from ShinyColors
 	else if ( iframe.contentDocument.location.hostname.indexOf("shinycolors.enza.fun") != -1 )
 	{
-		// Get Hiori config
-		var hiori_conf = SCWP.config.get("hiori");
+		// Get TransKR config
+		var transKR_conf = SCWP.config.get("transKR");
 
 		// If config is set to enable dialog translations...
-		if ( hiori_conf.dialogs )
+		if ( transKR_conf.active )
 		{
 			// Inject the script directly into the frame content.
 			var script = iframe.contentDocument.createElement("script");
-			script.src = chrome.extension.getURL("hiori/injects.js");
+			script.src = chrome.extension.getURL("transKR/injects.js");
 			iframe.contentDocument.head.appendChild(script);
 		}
 
