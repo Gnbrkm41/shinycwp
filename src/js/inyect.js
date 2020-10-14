@@ -330,7 +330,7 @@ document.querySelectorAll("#config input").forEach(function(el, i) {
 });
 
 // Process all buttons from the config...
-document.querySelectorAll("#config button").forEach(function(el, i) {
+document.querySelectorAll("#config .button").forEach(function(el, i) {
 	el.addEventListener("click", function(e) {
 		var action = e.target.getAttribute("config-custom");
 
@@ -340,6 +340,7 @@ document.querySelectorAll("#config button").forEach(function(el, i) {
 		}
 		else if ( action == "delete-cache" && e.shiftKey == true ) {
 			nw.App.clearCache();
+			iframe.contentWindow.localStorage.clear();
 			toggle_config();
 		}
 	});
@@ -427,6 +428,20 @@ function reload_iframe( suppress_osd = false )
 	var event = new CustomEvent('osd-message', {
 		detail: {
 			osd_type: "reload"
+		}
+	});
+
+	window.dispatchEvent(event);
+}
+
+function back_iframe( suppress_osd = false )
+{
+	iframe.contentWindow.history.back();
+	if ( suppress_osd ) { return; }
+
+	var event = new CustomEvent('osd-message', {
+		detail: {
+			osd_type: "back"
 		}
 	});
 
@@ -524,41 +539,14 @@ document.querySelector('#iframe').onload = function()
 	// Verify if frame domain is from ShinyColors
 	else if ( iframe.contentDocument.location.hostname.indexOf("shinycolors.enza.fun") != -1 )
 	{
-		// Get TransKR config
-		var transKR_conf = SCWP.config.get("transKR");
-
-		// If config is set to enable dialog translations...
-		if ( transKR_conf.active )
-		{
-			// Inject the script directly into the frame content.
-			var script = iframe.contentDocument.createElement("script");
-			script.src = chrome.extension.getURL("transKR/injects.js");
-			iframe.contentDocument.head.appendChild(script);
-		}
-
-		// Start a timer to hook their sound manager so that we can unmute the window.
-		var _inj_timer = null;
-
-		function hook_SM()
-		{
-			if ( iframe.contentWindow.aoba && iframe.contentWindow.aoba.soundManager )
+		var interval = setInterval(function () {
+			var cw = iframe.contentWindow;
+			if (cw.document.readyState == "complete")
 			{
-				iframe.contentWindow.aoba.soundManager.omute = iframe.contentWindow.aoba.soundManager.mute;
-				iframe.contentWindow.aoba.soundManager.mute = function()
-				{
-					var config = SCWP.config.get("sound");
-
-					if ( config.afk_mute ) { iframe.contentWindow.aoba.soundManager.omute(); }
-				}
+				clearInterval(interval);
+				iframe.contentWindow.parentDocument = document;
 			}
-			else
-			{
-				console.log("try again...");
-				_inj_timer = setTimeout(() => {hook_SM()}, 500);
-			}
-		}
-
-		hook_SM();
+		});
 	}
 
 	// Bind basic keyboard commands to app
@@ -580,6 +568,12 @@ document.querySelector('#iframe').onload = function()
 		if ( e.ctrlKey == true && e.which == 82 || e.which == 116 )
 		{
 			e.preventDefault(); reload_iframe();
+		}
+
+		// Ctrl + B or backspace
+		if ( e.ctrlKey == true && e.code == 'KeyB' || e.code == 'Backspace')
+		{
+			e.preventDefault(); back_iframe();
 		}
 
 		// Ctrl + T

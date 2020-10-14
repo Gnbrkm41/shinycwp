@@ -1,5 +1,5 @@
 {
-  "version": "0.29.2",
+  "nwjsVersion": "0.29.2",
   "package": {},
   "html": [
     "index.html"
@@ -9,7 +9,9 @@
     "fonts/**",
     "transKR/**",
     "shanicon.ico",
-    "shanicon.png"
+    "shanicon.png",
+    "bootstrap.js",
+    "js/config.js"
   ],
   "exclude": ["v8.log"],
   "publishDir": "../ShinyCWP_TransKR"

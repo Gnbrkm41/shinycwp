@@ -31,6 +31,17 @@ body {
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Material Icons';
+	src: local('Material Icons'),
+	  local('MaterialIcons-Regular'),
+	  url("/fonts/MaterialIcons-Regular.woff2") format('woff2'),
+	  url("/fonts/MaterialIcons-Regular.woff") format('woff'),
+	  url("/fonts/MaterialIcons-Regular.ttf") format('truetype');
+	  font-weight: normal;
+	  font-style: normal;
+  }
+
 [data-icon]:before {
 	font-family: "nwapp-icons" !important;
 	content: attr(data-icon);
@@ -62,6 +73,7 @@ body {
 .icon-fullscreen:before { content: "\66"; }
 .icon-minimize:before { content: "\69"; }
 .icon-refresh:before { content: "\72"; }
+.icon-back:before { content: "\E5C4"; font-family: "Material Icons" !important }
 .icon-config:before { content: "\63"; }
 .icon-pin:before { content: "\70"; }
 .icon-notif-off:before { content: "\6f"; }
@@ -416,7 +428,7 @@ div#overlay.hide {
 
 #menu-bar #config .icon-config { width: auto; }
 
-#menu-bar #config .button {
+#menu-bar #config .button,#menu-bar #config .button-transKR {
 	padding: 8px 12px;
 	
 	color: #2e00ff;
@@ -428,21 +440,21 @@ div#overlay.hide {
 	transition: 300ms;
 
 	border: 1px solid #0095ff;
-	width: 45%;
+	/* width: 45%; */
 	margin: 0 2.5%;
 }
 
-#menu-bar #config button.button:hover {
+#menu-bar #config button.button:hover, #menu-bar #config button.button-transKR:hover {
 	background: #fdfdfd;
 	box-shadow: 0 0 8px rgba(81, 86, 90, 0.3);
 }
 
-#menu-bar #config .button.danger {
+#menu-bar #config .button.danger, #menu-bar #config .button-transKR.danger {
 	color: red;
 	border: 1px solid red;
 }
 
-#menu-bar #config .button.danger:hover {
+#menu-bar #config .button.danger:hover #menu-bar #config .button-transKR.danger:hover {
 
 	box-shadow: 0 0 8px rgba(90, 81, 81, 0.3);
 }

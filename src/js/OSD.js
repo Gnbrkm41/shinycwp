@@ -29,6 +29,10 @@ OSD.bind = function(elem)
 		{
 			OSD.new("Reloading...");
 		}
+		else if ( e.detail.osd_type == "back" )
+		{
+			OSD.new("back");
+		}
 		else if ( e.detail.osd_type == "aot" )
 		{
 			var status = (e.detail.aot_status ? "off" : "on");

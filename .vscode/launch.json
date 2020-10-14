@@ -10,8 +10,7 @@
             "name": "Launch NWjs",
             "nwjsVersion": "0.29.2",
             "webRoot": "${workspaceFolder}/src",
-            "reloadAfterAttached": true,
-            "breakOnLoad": false
+            "reloadAfterAttached": true
         }
     ]
 }
