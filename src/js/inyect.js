@@ -570,8 +570,8 @@ document.querySelector('#iframe').onload = function()
 			e.preventDefault(); reload_iframe();
 		}
 
-		// Ctrl + B or backspace
-		if ( e.ctrlKey == true && e.code == 'KeyB' || e.code == 'Backspace')
+		// Ctrl + B
+		if ( e.ctrlKey == true && e.code == 'KeyB')
 		{
 			e.preventDefault(); back_iframe();
 		}
