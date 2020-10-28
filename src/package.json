@@ -1,6 +1,6 @@
 {
 	"name": "ShinyCWP_TransKR",
-	"version": "1.3.0704.6",
+	"version": "1.3.0704.7",
 	"main": "bootstrap.js",
 	"window": {
 		"icon": "shanicon.png"

@@ -343,6 +343,17 @@ document.querySelectorAll("#config .button").forEach(function(el, i) {
 			iframe.contentWindow.localStorage.clear();
 			toggle_config();
 		}
+		else if ( action == "open-bandainamcoid" ) {
+			nw.Window.open("https://account.bandainamcoid.com/",{
+				width: 1024,
+				height: 786,
+				frame: true,
+				title: "bandainamco id",
+				icon: "shanicon.png"
+			}, nwWin => {
+				console.log(nwWin);
+			})
+		}
 	});
 });
 
